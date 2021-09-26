@@ -1,0 +1,813 @@
+version: "2.0"
+stories:
+- story: login falied then login sucess
+  steps:
+  - intent: greet
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - user_first_name: null
+  - slot_was_set:
+    - user_last_name: null
+  - slot_was_set:
+    - is_logged_in: false
+  - slot_was_set:
+    - user_otp: null
+  - intent: check_all_orders
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    entities:
+    - email: a@a.com
+  - action: login_form
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - email_tries: 1
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - intent: affirm
+  - action: utter_signed_up_user_failed_login_response
+  - action: utter_anything_else
+  - intent: deny
+  - action: utter_i_am_here_for_you
+  - intent: check_all_orders
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    entities:
+    - email: pooja@neuralspace.ai
+  - action: login_form
+  - slot_was_set:
+    - user_email: pooja@neuralspace.ai
+  - slot_was_set:
+    - requested_slot: user_otp
+  - intent: affirm
+    entities:
+    - number: 9876543
+  - action: login_form
+  - slot_was_set:
+    - user_otp: null
+  - slot_was_set:
+    - otp_tries: 1
+  - slot_was_set:
+    - requested_slot: user_otp
+  - intent: inform
+    entities:
+    - number: 9876
+  - action: login_form
+  - slot_was_set:
+    - user_otp: 9876
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - slot_was_set:
+    - user_email: pooja@neuralspace.ai
+  - slot_was_set:
+    - user_first_name: Pooja
+  - slot_was_set:
+    - user_last_name: Mishra
+  - slot_was_set:
+    - is_logged_in: true
+  - slot_was_set:
+    - user_otp: '9876'
+  - action: action_check_all_orders
+  - action: utter_anything_else
+  - intent: deny
+  - action: utter_i_am_here_for_you
+  - intent: affirm
+  - action: utter_anything_else_options
+  - intent: check_all_orders
+  - action: action_check_all_orders
+  - action: utter_anything_else
+  - intent: affirm
+  - action: utter_anything_else_options
+
+
+- story: login blocked
+  steps:
+  - intent: greet
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - user_first_name: null
+  - slot_was_set:
+    - user_last_name: null
+  - slot_was_set:
+    - is_logged_in: false
+  - slot_was_set:
+    - user_otp: null
+  - intent: check_all_orders
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    entities:
+    - email: a@a.com
+  - action: login_form
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - email_tries: 1
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - intent: inform
+    entities:
+    - email: a@a.com
+  - action: action_default_fallback
+  - intent: check_all_orders
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    entities:
+    - email: a@a.com
+  - action: login_form
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - login_blocked: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - slot_was_set:
+    - email_tries: 0
+  - slot_was_set:
+    - otp_tries: 0
+  - intent: check_all_orders
+  - action: utter_check_all_orders_for_blocked_user
+  - action: action_login_form
+  - slot_was_set:
+    - email_tries: 0
+  - slot_was_set:
+    - otp_tries: 0
+
+- story: login failed
+  steps:
+  - intent: greet
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - user_first_name: null
+  - slot_was_set:
+    - user_last_name: null
+  - slot_was_set:
+    - is_logged_in: false
+  - slot_was_set:
+    - user_otp: null
+  - intent: check_all_orders
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: out_of_scope
+  - action: utter_default
+  - action: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: out_of_scope
+  - action: utter_default
+  - action: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: out_of_scope
+    entities:
+    - number: 34567890987
+  - action: login_form
+  - slot_was_set:
+    - user_otp: null
+  - slot_was_set:
+    - otp_tries: 1
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: check_all_orders
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    entities:
+    - email: pooja@neuralspace.ai
+  - action: login_form
+  - slot_was_set:
+    - user_email: pooja@neuralspace.ai
+  - slot_was_set:
+    - requested_slot: user_otp
+  - intent: out_of_scope
+    entities:
+    - number: 98765432
+  - action: login_form
+  - slot_was_set:
+    - user_otp: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - login_blocked: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - slot_was_set:
+    - email_tries: 0
+  - slot_was_set:
+    - otp_tries: 0
+
+- story: check all orders + login + show more 1
+  steps:
+  - intent: greet
+    user: |-
+      hi
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - user_first_name: null
+  - slot_was_set:
+    - user_last_name: null
+  - slot_was_set:
+    - is_logged_in: false
+  - slot_was_set:
+    - user_otp: null
+  - intent: check_all_orders
+    user: |-
+      check all orders
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    user: |-
+      [dishant@neuralspace.ai](email)
+  - action: login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - requested_slot: user_otp
+  - intent: inform
+    user: |-
+      [1234]{"entity": "number", "value": 1234}
+  - action: login_form
+  - slot_was_set:
+    - user_otp: 1234
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - user_first_name: Dishant
+  - slot_was_set:
+    - user_last_name: Gandhi
+  - slot_was_set:
+    - is_logged_in: true
+  - slot_was_set:
+    - user_otp: '1234'
+  - action: action_check_all_orders
+  - slot_was_set:
+    - show_more_count: 1
+  - intent: show_more
+    user: |-
+      show more
+  - action: action_check_all_orders
+  - slot_was_set:
+    - show_more_count: -1
+  - intent: show_more
+    user: |-
+      show more
+  - action: show_more_action
+
+- story: check all orders + login + show more 2
+  steps:
+  - intent: greet
+    user: |-
+      hi
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - user_first_name: null
+  - slot_was_set:
+    - user_last_name: null
+  - slot_was_set:
+    - is_logged_in: false
+  - slot_was_set:
+    - user_otp: null
+  - intent: check_all_orders
+    user: |-
+      /check_all_orders
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    user: |-
+      [1234]{"entity": "number", "value": 1234}
+  - action: login_form
+  - slot_was_set:
+    - user_otp: null
+  - slot_was_set:
+    - otp_tries: 1
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    user: |-
+      [dishant@neuralspace.ai](email)
+  - action: login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - requested_slot: user_otp
+  - intent: inform
+    user: |-
+      [1234]{"entity": "number", "value": 1234}
+  - action: login_form
+  - slot_was_set:
+    - user_otp: 1234
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - user_first_name: Dishant
+  - slot_was_set:
+    - user_last_name: Gandhi
+  - slot_was_set:
+    - is_logged_in: true
+  - slot_was_set:
+    - user_otp: '1234'
+  - intent: greet
+    user: |-
+      hi
+  - action: personal_greet
+  - intent: check_all_orders
+    user: |-
+      /check_all_orders
+  - action: action_check_all_orders
+  - slot_was_set:
+    - action_that_triggered_show_more: action_check_all_orders
+  - slot_was_set:
+    - show_more_count: 2
+  - slot_was_set:
+    - is_show_more_triggered: false
+  - intent: show_more
+    user: |-
+      Show more
+  - action: show_more_action
+  - slot_was_set:
+    - is_show_more_triggered: true
+  - action: action_check_all_orders
+  - slot_was_set:
+    - action_that_triggered_show_more: null
+  - slot_was_set:
+    - show_more_count: -1
+  - slot_was_set:
+    - is_show_more_triggered: false
+
+- story: return order
+  steps:
+  - intent: greet
+    user: |-
+      hi
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - user_first_name: Dishant
+  - slot_was_set:
+    - user_last_name: Gandhi
+  - slot_was_set:
+    - is_logged_in: true
+  - slot_was_set:
+    - user_otp: '1234'
+  - intent: return_order
+    user: |-
+      /return_order
+  - action: action_show_valid_return_order
+  - slot_was_set:
+    - action_that_triggered_show_more: null
+  - slot_was_set:
+    - show_more_count: -1
+  - slot_was_set:
+    - is_show_more_triggered: false
+  - intent: select_return_order
+    user: |-
+      I want to return [DASH123457](order_id)
+  - action: return_order_form
+  - active_loop: return_order_form
+  - slot_was_set:
+    - order_id_for_return: DASH123457
+  - slot_was_set:
+    - requested_slot: return_a_reason
+  - intent: ask_return_a_reason
+    user: |-
+      [Quality issues](return_a_reason)
+  - slot_was_set:
+    - return_a_reason: Quality issues
+  - action: return_order_form
+  - slot_was_set:
+    - return_a_reason: Quality issues
+  - slot_was_set:
+    - requested_slot: return_a_reason_description
+  - intent: ask_return_a_reason
+    user: |-
+      I got a damaged product
+  - action: return_order_form
+  - slot_was_set:
+    - return_a_reason_description: I got a damaged product
+  - slot_was_set:
+    - requested_slot: return_e_type
+  - intent: ask_return_e_type
+    user: |-
+      Get [refund]{"entity": "return_e_type", "value": "Return Product"} for my product
+  - slot_was_set:
+    - return_e_type: Return Product
+  - action: return_order_form
+  - slot_was_set:
+    - return_e_type: Return Product
+  - slot_was_set:
+    - requested_slot: return_pickup_address
+  - intent: inform
+    user: |-
+      my building, my country
+  - action: return_order_form
+  - slot_was_set:
+    - return_pickup_address: my building, my country
+  - slot_was_set:
+    - requested_slot: return_refund_account
+  - intent: ask_return_refund_account
+    user: |-
+      [Primary Account](return_refund_account)
+  - slot_was_set:
+    - return_refund_account: Primary Account
+  - action: return_order_form
+  - slot_was_set:
+    - return_refund_account: Primary Account
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_return_order
+  - slot_was_set:
+    - order_id_for_return: null
+  - slot_was_set:
+    - return_a_reason: null
+  - slot_was_set:
+    - return_a_reason_description: null
+  - slot_was_set:
+    - return_pickup_address: null
+  - slot_was_set:
+    - return_refund_account: null
+  - action: utter_anything_else
+  - intent: deny
+    user: |-
+      No
+  - action: utter_i_am_here_for_you
+
+- story: order status
+  steps:
+  - slot_was_set:
+    - session_started_metadata:
+        user_token: null
+  - slot_was_set:
+    - session_started_metadata:
+        user_token: null
+  - intent: greet
+    user: |-
+      hi
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - user_first_name: null
+  - slot_was_set:
+    - user_last_name: null
+  - slot_was_set:
+    - is_logged_in: false
+  - slot_was_set:
+    - user_otp: null
+  - intent: order_status
+    user: |-
+      order status
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    user: |-
+      [dishant@neuralspace.ai](email)
+  - action: login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - requested_slot: user_otp
+  - intent: inform
+    user: |-
+      [1234]{"entity": "number", "value": 1234}
+  - action: login_form
+  - slot_was_set:
+    - user_otp: 1234
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - user_first_name: Dishant
+  - slot_was_set:
+    - user_last_name: Gandhi
+  - slot_was_set:
+    - is_logged_in: true
+  - slot_was_set:
+    - user_otp: '1234'
+  - intent: order_status
+    user: |-
+      order status
+  - action: action_order_status
+  - intent: order_status
+    user: |-
+      [DASH123456](order_id)[123456]{"entity": "number", "value": 123456}
+  - action: action_order_status
+  - action: utter_anything_else
+  - intent: affirm
+    user: |-
+      Yes
+  - action: utter_anything_else_options
+
+- story: Switch form
+  steps:
+  - intent: greet
+    user: |-
+      hi
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - user_first_name: null
+  - slot_was_set:
+    - user_last_name: null
+  - slot_was_set:
+    - is_logged_in: false
+  - slot_was_set:
+    - user_otp: null
+  - intent: return_order
+    user: |-
+      /return_order
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    user: |-
+      [dishant@neuralspace.ai](email)
+  - action: login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - requested_slot: user_otp
+  - intent: inform
+    user: |-
+      [1234]{"entity": "number", "value": 1234}
+  - action: login_form
+  - slot_was_set:
+    - user_otp: 1234
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - user_first_name: Dishant
+  - slot_was_set:
+    - user_last_name: Gandhi
+  - slot_was_set:
+    - is_logged_in: true
+  - slot_was_set:
+    - user_otp: '1234'
+  - intent: select_return_order
+    user: |-
+      please place the return order for [DASH123456](order_id)[123456]{"entity": "number", "value": 123456}
+  - action: return_order_form
+  - active_loop: return_order_form
+  - slot_was_set:
+    - order_id_for_return: DASH123456
+  - slot_was_set:
+    - requested_slot: return_a_reason
+  - intent: check_all_orders
+    user: |-
+      check all orders
+  - action: action_switch
+  - slot_was_set:
+    - order_id_for_return: null
+  - slot_was_set:
+    - return_a_reason: null
+  - slot_was_set:
+    - return_a_reason_description: null
+  - slot_was_set:
+    - return_e_type: null
+  - slot_was_set:
+    - return_pickup_address: null
+  - slot_was_set:
+    - return_refund_account: null
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_check_all_orders
+  - slot_was_set:
+    - action_that_triggered_show_more: action_check_all_orders
+  - slot_was_set:
+    - show_more_count: 2
+  - slot_was_set:
+    - is_show_more_triggered: false
+
+- story: feedback form
+  steps:
+    user: |
+      can you start feedback form
+  - action: feedback_form
+  - active_loop: feedback_form
+    user: |
+      [Awesome](feedback)
+  - action: action_feedback_submit
+
+- story: product inquiry with product details
+  steps:
+  - intent: greet
+    user: |-
+      hi
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - user_first_name: null
+  - slot_was_set:
+    - user_last_name: null
+  - slot_was_set:
+    - is_logged_in: false
+  - slot_was_set:
+    - user_otp: null
+  - intent: product_inquiry
+    user: |-
+      laptops
+  - action: action_product_inquiry
+  - intent: product_details
+  - user: |-
+      LN35691 details
+  - action: action_product_details
+  - action: utter_anything_else
+  - intent: deny
+  - user: |-
+      no
+  - action: utter_i_am_here_for_you
+
+- story: Buttons not implemented
+  steps:
+  - intent: greet
+    user: |-
+      hi
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: null
+  - slot_was_set:
+    - user_first_name: null
+  - slot_was_set:
+    - user_last_name: null
+  - slot_was_set:
+    - is_logged_in: false
+  - slot_was_set:
+    - user_otp: null
+  - intent: check_all_orders
+    user: |-
+      /check_all_orders
+  - action: utter_not_logged_in_prompt
+  - action: login_form
+  - active_loop: login_form
+  - slot_was_set:
+    - requested_slot: user_email
+  - intent: inform
+    user: |-
+      [dishant@neuralspace.ai](email)
+  - action: login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - requested_slot: user_otp
+  - intent: otp
+    user: |-
+      [1234]{"entity": "number", "value": 1234}
+  - action: login_form
+  - slot_was_set:
+    - user_otp: 1234
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_login_form
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - user_first_name: Dishant
+  - slot_was_set:
+    - user_last_name: Gandhi
+  - slot_was_set:
+    - is_logged_in: true
+  - slot_was_set:
+    - user_otp: '1234'
+  - action: action_check_all_orders
+  - slot_was_set:
+    - action_that_triggered_show_more: action_check_all_orders
+  - slot_was_set:
+    - show_more_count: 2
+  - slot_was_set:
+    - is_show_more_triggered: false
+  - intent: un_supported_buttons
+    user: |-
+      use case not available
+  - action: utter_not_implemented
+
+- story: feedback form
+  steps:
+  - slot_was_set:
+    - session_started_metadata:
+        user_token: dishant@neuralspace.ai
+  - slot_was_set:
+    - session_started_metadata:
+        user_token: dishant@neuralspace.ai
+  - intent: greet
+    user: |-
+      /greet
+  - action: personal_greet
+  - slot_was_set:
+    - user_email: dishant@neuralspace.ai
+  - slot_was_set:
+    - user_first_name: Dishant
+  - slot_was_set:
+    - user_last_name: Gandhi
+  - slot_was_set:
+    - is_logged_in: true
+  - slot_was_set:
+    - user_otp: '1234'
+  - intent: order_status
+    user: |-
+      order status of [DASH123456](order_id)[DASH123456](order_id)[123456]{"entity": "number", "value": 123456}
+  - action: action_order_status
+  - action: utter_anything_else
+  - intent: deny
+    user: |-
+      No
+  - action: utter_i_am_here_for_you
+  - action: action_feedback_reminder
+  - intent: EXTERNAL_feedback
+    user: |-
+      EXTERNAL: EXTERNAL_feedback
+  - action: action_start_feedback_form
+  - active_loop: feedback_form
+  - action: feedback_form
+  - slot_was_set:
+    - requested_slot: feedback
+  - intent: ask_feedback
+    user: |-
+      [Awesome](feedback)
+  - slot_was_set:
+    - feedback: Awesome
+  - action: feedback_form
+  - slot_was_set:
+    - feedback: Awesome
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_feedback_submit
+  - slot_was_set:
+    - feedback: null

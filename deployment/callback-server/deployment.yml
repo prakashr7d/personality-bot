@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: callback-server
+  namespace: dash-ecomm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: callback-server
+      type: dash-ecomm
+  template:
+    metadata:
+      labels:
+        component: callback-server
+        type: dash-ecomm
+    spec:
+      containers:
+      - image: textclouddev.azurecr.io/neuralspace/dash-ecomm:latest
+        imagePullPolicy: Always
+        command: ["poetry","run","python", "-m", "dash_ecomm.callback_server"]
+        name: dash-ecomm-callback-server
+        ports:
+        - containerPort: 5054
+        resources:
+          requests:
+            cpu: 0.2
+            memory: 100Mi
+      restartPolicy: Always

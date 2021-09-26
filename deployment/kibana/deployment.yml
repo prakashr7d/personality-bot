@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana
+  namespace: dash-ecomm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: kibana
+      type: dash-ecomm
+  template:
+    metadata:
+      labels:
+        component: kibana
+        type: dash-ecomm
+    spec:
+      containers:
+      - image: docker.elastic.co/kibana/kibana:7.12.0
+        imagePullPolicy: Always
+        name: dash-ecomm-kibana
+        env:
+          - name: "ELASTICSEARCH_HOSTS"
+            value: "http://elasticsearch:9200"
+          - name: "SERVER_BASEPATH"
+            value: "/bot-analytics"
+          - name: "SERVER_REWRITEBASEPATH"
+            value: "true"
+        ports:
+        - containerPort: 5601
+        resources:
+          requests:
+            cpu: 0.2
+            memory: 100Mi
+      initContainers:
+      - name: elasticsearch-running
+        image: curlimages/curl:7.75.0
+        command: ["curl", "--retry", "10", "--retry-connrefused", "http://elasticsearch:9200/_cat/health"]
+      restartPolicy: Always

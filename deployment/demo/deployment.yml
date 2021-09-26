@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  namespace: dash-ecomm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: demo
+      type: dash-ecomm
+  template:
+    metadata:
+      labels:
+        component: demo
+        type: dash-ecomm
+    spec:
+      containers:
+      - image: textclouddev.azurecr.io/neuralspace/dash-ecomm:latest
+        imagePullPolicy: Always
+        command: ["poetry", "run", "python", "-m", "http.server", "7000"]
+        name: dash-ecomm-demo
+        workingDir: /app/demo/prod
+        ports:
+        - containerPort: 7000
+        resources:
+          requests:
+            cpu: 0.2
+            memory: 100Mi
+      restartPolicy: Always

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>E-commerce Demo Website</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://ns-botlibrary-ecomm.uksouth.cloudapp.azure.com/ecomm/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+    .rw-conversation-container .rw-header{ background-color: #ff523b; }
+    .rw-messages-container .rw-message .rw-client{ background-color: #ff523b; }
+    .rw-widget-embedded{background-color: #ff523b;}
+    .rw-conversation-container .rw-header .rw-close-function{background-color: #ff523b;}
+    .rw-messages-container .rw-replies  .rw-reply{ background: #ff523b; border: #ff523b;}
+    .rw-launcher{background: #ff523b;}
+    .rw-carousel-container .rw-carousel-card .rw-carousel-buttons-container .rw-reply {background: #ff523b; border: #ff523b;}
+  </style>
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" width="125px">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Products</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">Account</a></li>
+                    <li><button type="button" class="btn" id="loginButton">Login</a></li>
+                    <li><button type="button" class="btn" id="logoutButton">Logout</a></li>
+                    <li><span id="userName"></span></li>
+                    <li><img src="images/cart.png" width="30px" height="30px"></li>
+                </ul>
+
+            </nav>
+            
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Give your Workout <br>A new style</h1>
+                <p>Sweating while you shop count as Exercise</p>
+                <a href="#" class="btn">Explore Now &#8594</a>
+            </div>
+
+
+            <div class="col-md-6">
+                <img src="images/image1.png" width="600px">
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!--&lt;!&ndash; featured Categories&ndash;&gt;-->
+
+
+<!--<div class="categories">-->
+<!--    <div class="small-container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-3">-->
+<!--                <img src="images/category-1.jpg">-->
+<!--            </div>-->
+<!--            <div class="col-3">-->
+<!--                <img src="images/category-2.jpg">-->
+<!--            </div>-->
+<!--            <div class="col-3">-->
+<!--                <img src="images/category-3.jpg">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<!-- featured product-->
+
+<div class="small-container">
+    <h2 class="title">Featured Products</h2>
+    <div class="row">
+        <div class="col-4">
+            <img src="images/product-1.jpg">
+            <h4>U.S.Polo Assn</h4>
+            <p>Red Printed T-shirt</p>
+            <div class="ratings">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+            </div>
+          <p>Rs 500.00</p>
+            </div>
+
+          <div class="col-4">
+              <img src="images/product-2.jpg">
+              <h4>HRX by Hrithik Roshan</h4>
+              <p>Men Front Runner Shoe</p>
+              <div class="ratings">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>     
+              </div>
+            <p>Rs 500.00</p>
+              </div>
+           <div class="col-4">
+               <img src="images/product-3.jpg">
+               <h4>Ecko Unltd</h4>
+               <p>Men Slim Fit Track Pant</p>
+               <div class="ratings">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-o"></i>
+               </div>
+             <p>Rs 500.00</p>
+           </div>                             
+
+           <div class="col-4">                    
+               <img src="images/product-4.jpg">
+               <h4>Highlander</h4>
+               <p>Blue Printed T-shirt</p>
+               <div class="ratings">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-o"></i>
+               <i class="fa fa-star-o"></i>
+               </div>
+             <p>Rs 500.00</p>
+               </div>
+
+    </div>
+
+   <h2 class="title">Latest Products</h2> <div class="row">
+    <div class="col-4">
+        <img src="images/product-5.jpg">
+        <h4>U.S.Polo Assn</h4>
+        <p>Red Printed T-shirt</p>
+        <div class="ratings">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        <p>Rs 500.00</p>
+    </div>
+
+    <div class="col-4">
+        <img src="images/product-6.jpg">
+        <h4>HRX by Hrithik Roshan</h4>
+        <p>Men Front Runner Shoe</p>
+        <div class="ratings">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        <p>Rs 500.00</p>
+    </div>
+    <div class="col-4">
+        <img src="images/product-7.jpg">
+        <h4>Ecko Unltd</h4>
+        <p>Men Slim Fit Track Pant</p>
+        <div class="ratings">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+        </div>
+        <p>Rs 500.00</p>
+    </div>
+
+    <div class="col-4">
+        <img src="images/product-8.jpg">
+        <h4>Highlander</h4>
+        <p>Blue Printed T-shirt</p>
+        <div class="ratings">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        <p>Rs 500.00</p>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <img src="images/product-9.jpg">
+            <h4>U.S.Polo Assn</h4>
+            <p>Red Printed T-shirt</p>
+            <div class="ratings">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>Rs 500.00</p>
+        </div>
+
+        <div class="col-4">
+            <img src="images/product-10.jpg">
+            <h4>HRX by Hrithik Roshan</h4>
+            <p>Men Front Runner Shoe</p>
+            <div class="ratings">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>Rs 500.00</p>
+        </div>
+        <div class="col-4">
+            <img src="images/product-11.jpg">
+            <h4>Ecko Unltd</h4>
+            <p>Men Slim Fit Track Pant</p>
+            <div class="ratings">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+            </div>
+            <p>Rs 500.00</p>
+        </div>
+
+        <div class="col-4">
+            <img src="images/product-12.jpg">
+            <h4>Highlander</h4>
+            <p>Blue Printed T-shirt</p>
+            <div class="ratings">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>Rs 500.00</p>
+        </div>
+
+</div>
+
+
+<!--  offer-->
+    <section>
+    <div class="offer">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="images/exclusive.png" class="offer-image">
+                </div>
+                <div class="col-2">
+                    <p>Exclusively Available on RedStore</p>
+                    <h1>Mi Smart Band 4</h1>
+                    <small>
+                        Mi smart Band 4 features a 39.9% larger AMOLED color full-tuch display
+                        with adjustabe brightness.
+                        Mi smart Band 4 features a 39.9% larger AMOLED color full-tuch display
+                        with adjustabe brightness.
+                    </small>
+                    <a href="" class="btn">Buy Now &#8594;</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </section>
+<!--testimonial    -->
+    <section>
+    <div class="testimonial">
+     <div class="small-container">
+      <div class="row">
+    <div class="col-3">
+        <i class="fa fa-quote-left"></i>
+         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+        <div class="ratings">
+
+        <i class="fa fa-star"></i>
+         <i class="fa fa-star"></i>
+         <i class="fa fa-star"></i>
+          <i class = "fa fa-star-o"></i>
+           </div>
+        <img src="images/user-1.png">
+        <h3>Paula</h3>
+    </div>
+
+          <div class="col-3">
+              <i class="fa fa-quote-left"></i>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. </p>
+              <div class="ratings">
+
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class = "fa fa-star-o"></i>
+              </div>
+              <img src="images/user-2.png">
+              <h3>Thomas</h3>
+          </div>
+
+          <div class="col-3">
+              <i class="fa fa-quote-left"></i>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. </p>
+              <div class="ratings">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class = "fa fa-star-o"></i>
+              </div>
+              <img src="images/user-3.png">
+              <h3>Natalie</h3>
+          </div>
+
+
+
+        </div>
+      </div>
+     </div>
+    </div>
+
+    </div>
+
+
+<!--footer-->
+
+<div class="footer">
+<div class="container">
+<div class="row">
+ <div class="footer-col-1">
+     <h3>Download our App</h3>
+     <p>Download App for Android and ios mobile phone</p>
+
+
+ </div>
+ <div class="footer-col-2">
+    <img src="images/logo-white.png">
+ <h3>Download our App</h3>
+ <p>Download App for Android and ios mobile phone.</p>
+ </div>
+    <div class="footer-col-3">
+        <h3>Useful Links</h3>
+        <ul>
+            <li>Coupans</li>
+            <li>Blog Post</li>
+            <li>Coupans</li>
+            <li>Return policy</li>
+
+        </ul>
+    </div>
+
+    <div class="footer-col-4">
+        <h3>Follow us</h3>
+        <ul>
+        <li>Fcaebook</li>
+        <li>Twitter</li>
+        <li>Instagram</li>
+        <li>Youtube</li>
+        </ul>
+
+
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+</div>
+
+
+<!-- Adding the login modal here -->
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Login to your account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="loginBody">
+                <form>
+                <div class="form-group">
+                    <label for="userEmail">Email address</label>
+                    <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                    <div class="form-group">
+                    <label for="userPassword">Password</label>
+                    <input type="password" class="form-control" id="userPassword" placeholder="Password">
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="loginAction" >Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to logout?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="logoutAction" >Yes log me out</button>
+            </div>
+        </div>
+    </div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>!(function () {
+    let propUser = window.localStorage.getItem('user')
+    custom_data = {user_token: propUser}
+    let propName = propUser ? propUser.split('@')[0] : '';
+    console.log(propUser, propName,custom_data)
+    let e = document.createElement("script"),
+      t = document.head || document.getElementsByTagName("head")[0];
+    (e.src =
+      "https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.0/lib/index.js"),
+      (e.async = !0),
+      (e.onload = () => {
+        window.WebChat.default(
+          {
+            customData: custom_data,
+            socketUrl: "https://ns-botlibrary-ecomm.uksouth.cloudapp.azure.com",
+            initPayload: '/greet'
+          },
+          null
+        );
+      }),
+      t.insertBefore(e, t.firstChild);
+  })();
+  </script>
+<!-- Handle Login -->
+<script>
+    let user, name;
+    $(document).ready(function(){
+        user = window.localStorage.getItem('user');
+        if(user){
+            $('#loginButton').hide()
+            $('#logoutButton').show()
+            name = user.split('@')[0]
+            $('#userName').html(`<i class="fa fa-user"></i> Hi ${name}`);
+        }
+        else{
+            $('#loginButton').show()
+            $('#logoutButton').hide()
+        }
+    })
+
+    $('#loginButton').click(function(e){
+        $('#loginModal').modal('toggle')
+    })
+    $('#logoutButton').click(function(e){
+        $('#logoutModal').modal('toggle')
+    })
+    $('#loginAction').click(function(e){
+        user = $('#userEmail').val()
+        window.localStorage.setItem('user', user)
+        $('#loginBody').html(`
+            <div>
+                <div>
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+                <div style="text-align:center;">Login successful</div>
+            </div>`)
+        setTimeout(function(){
+            $('#loginModal').modal('toggle')
+            user_id = window.localStorage.getItem('user')
+            console.log(user_id)
+            window.localStorage.clear()
+            window.localStorage.setItem('user', user_id)
+            window.location.reload()
+        },2000)
+    })
+    $('#logoutAction').click(function(e){
+        window.localStorage.removeItem('user')
+        window.localStorage.clear()
+        window.location.reload()
+    })
+</script>
+<script>
+    function getCrenedtials(){
+        return
+    }
+</script>
+</body>
+
+</html>

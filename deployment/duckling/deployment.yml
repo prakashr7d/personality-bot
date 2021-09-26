@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duckling
+  namespace: dash-ecomm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: duckling
+      type: dash-ecomm
+  template:
+    metadata:
+      labels:
+        component: duckling
+        type: dash-ecomm
+    spec:
+      containers:
+      - image: rasa/duckling:latest
+        imagePullPolicy: Always
+        name: dash-ecomm-duckling
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: 0.2
+            memory: 100Mi
+      restartPolicy: Always

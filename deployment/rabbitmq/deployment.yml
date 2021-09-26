@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  namespace: dash-ecomm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: rabbitmq
+      type: dash-ecomm
+  template:
+    metadata:
+      labels:
+        component: rabbitmq
+        type: dash-ecomm
+    spec:
+      containers:
+      - image: rabbitmq:3-management
+        imagePullPolicy: Always
+        name: dash-ecomm-rabbit-mq
+        ports:
+        - containerPort: 15672
+        - containerPort: 5672
+        resources:
+          requests:
+            cpu: 0.2
+            memory: 100Mi
+      restartPolicy: Always

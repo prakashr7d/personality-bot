@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch
+  namespace: dash-ecomm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: elasticsearch
+      type: dash-ecomm
+  template:
+    metadata:
+      labels:
+        component: elasticsearch
+        type: dash-ecomm
+    spec:
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+      containers:
+      - image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0
+        imagePullPolicy: Always
+        name: dash-ecomm-elasticsearch
+        volumeMounts:
+          - mountPath: /usr/share/elasticsearch/data
+            name: dshm
+        env:
+          - name: "xpack.security.enabled"
+            value: "false"
+          - name: "discovery.type"
+            value: "single-node"
+        ports:
+        - containerPort: 9200
+        - containerPort: 9300
+        securityContext:
+          capabilities:
+            add:
+              - IPC_LOCK
+        resources:
+          requests:
+            cpu: 0.2
+            memory: 100Mi
+      restartPolicy: Always

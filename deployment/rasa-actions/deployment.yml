@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rasa-actions
+  namespace: dash-ecomm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: rasa-actions
+      type: dash-ecomm
+  template:
+    metadata:
+      labels:
+        component: rasa-actions
+        type: dash-ecomm
+    spec:
+      containers:
+      - image: textclouddev.azurecr.io/neuralspace/dash-ecomm:latest
+        imagePullPolicy: Always
+        command: ["poetry", "run", "rasa", "run", "actions"]
+        name: dash-ecomm-rasa-actions
+        env:
+        - name: "ELASTICSEARCH_URL"
+          value: "http://elasticsearch:9200"
+        ports:
+        - containerPort: 5055
+        resources:
+          requests:
+            cpu: 0.2
+            memory: 100Mi
+      restartPolicy: Always

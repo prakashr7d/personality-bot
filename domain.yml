@@ -1,0 +1,796 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- un_supported_buttons:
+    use_entities: []
+- check_all_orders:
+    use_entities: true
+- order_cancel:
+    use_entities: true
+- return:
+    use_entities: true
+- product_stock:
+    use_entities: true
+- product_updates:
+    use_entities: true
+- login:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- inform:
+    use_entities: []
+- greet:
+    use_entities: []
+- chitchat:
+    use_entities: []
+- faq:
+    use_entities: []
+- out_of_scope:
+    use_entities: []
+- nlu_fallback:
+    use_entities: true
+- otp:
+    use_entities:
+      - number
+    ignore_entities:
+      - es_product_id
+      - order_id
+- EXTERNAL_logout:
+    use_entities: []
+- EXTERNAL_unblock_login:
+    use_entities: []
+- show_more:
+    use_entities: []
+- return_order:
+    use_entities: []
+- ask_return_refund_account:
+    use_entities: true
+- ask_return_a_reason:
+    use_entities: true
+- ask_return_e_type:
+    use_entities: true
+- select_return_order:
+    use_entities:
+      - order_id
+    ignore_entities:
+      - es_product_id
+      - number
+- order_status:
+    use_entities:
+      - order_id
+    ignore_entities:
+      - es_product_id
+      - number
+- replace_order:
+    use_entities: []
+- ask_feedback:
+    use_entities:
+      - feedback
+- feedback:
+    use_entities: []
+- EXTERNAL_feedback:
+    use_entities: []
+- ask_for_menu:
+    use_entities: []
+- product_inquiry:
+    use_entities:
+      - category
+      - sub_category
+      - color
+      - gender
+      - brand
+      - min
+      - max
+- product_details:
+    use_entities:
+      - es_product_id
+    ignore_entities:
+      - order_id
+      - number
+- buy_now:
+    use_entities: []
+- cancel_order:
+    use_entities: []
+- mood_based_search:
+    use_entities: []
+- enquire_about_a_service_request:
+    use_entities: []
+- Search_via_photos:
+    use_entities: []
+- buy_items_in_cart:
+    use_entities: []
+- add_to_cart:
+    use_entities: []
+- ask_order_id:
+    use_entities:
+      - order_id
+entities:
+- email
+- number
+- negation
+- language
+- company
+- return_a_reason
+- return_e_type
+- return_refund_account
+- order_id
+- return_type
+- refund_account
+- reason_for_return
+- min
+- max
+- category
+- sub_category
+- color
+- brand
+- gender
+- feedback
+- es_product_id
+slots:
+  user_email:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  user_first_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  user_last_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  is_logged_in:
+    type: bool
+    initial_value: false
+    auto_fill: true
+    influence_conversation: true
+  user_otp:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  open_feedback:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  requested_slot:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  previous_form:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  next_form:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  email_tries:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: 0
+    auto_fill: true
+    influence_conversation: false
+    max_value: 1.0
+    min_value: 0.0
+  login_blocked:
+    type: bool
+    initial_value: false
+    auto_fill: false
+    influence_conversation: true
+  otp_tries:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: 0
+    auto_fill: true
+    influence_conversation: false
+    max_value: 1.0
+    min_value: 0.0
+  show_more_count:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+    max_value: 1.0
+    min_value: 0.0
+  action_that_triggered_show_more:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  is_show_more_triggered:
+    type: rasa.shared.core.slots.BooleanSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: false
+  order_id_for_return:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+    max_value: 1.0
+    min_value: 0.0
+  return_a_reason:
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+    values:
+    - don't need the product
+    - quality issues
+    - incorrect items
+  return_a_reason_description:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  return_pickup_address:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  return_refund_account:
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+    values:
+    - primary account
+    - credit points
+  return_e_type:
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+    values:
+    - return product
+    - replace product
+  price_min:
+    type: float
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  price_max:
+    type: float
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  category:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  sub_category:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  color:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  brand:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  gender:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  scroll_id:
+    type: text
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  feedback:
+    type: categorical
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+    values:
+    - Awesome
+    - Meh
+    - Poor
+  es_product_id:
+    type: text
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_generic_greet:
+  - buttons:
+    - payload: /check_all_orders
+      title: Check All Orders
+    - payload: /return_order
+      title: Return An Order
+    - payload: I want to buy a product
+      title: Product Enquiry
+    - payload: /buy_items_in_cart
+      title: Buy Items In Cart
+    - payload: /mood_based_search
+      title: 🆕 Mood Based Search 🔥
+    - payload: /Search_via_photos
+      title: 🆕 Search Via Photos 🔥
+    - payload: i want discount
+      title: Looking For Discounts And Offers
+    - payload: /enquire_about_a_service_request
+      title: Enquire About A Service Request
+    text: Hi there! I'm Dash, a virtual sales assistant. How can I help you? These are a few things I can do for you.
+  utter_default:
+  - text: I don't think I understand. Can you be a bit more clear or paraphrase?
+  utter_open_current_orders:
+  - text: These orders are currently being shipped to you.
+  utter_no_open_orders:
+  - text: Looks like you don't have any active orders
+  utter_chitchat/not_registered_user:
+  - text: No worries. You can create an account on our website.
+  utter_chitchat/goodbye:
+  - text: bye bye
+  - text: c u l8er allig8er
+  utter_no_order:
+  - text: Hmm, seems like we don't have an order associated with that email
+  utter_personalized_greet_new_session:
+  - buttons:
+    - payload: /check_all_orders
+      title: Check All Orders
+    - payload: /return_order
+      title: Return An Order
+    - payload: I want to buy a product
+      title: Product Enquiry
+    - payload: /buy_items_in_cart
+      title: Buy Items In Cart
+    - payload: /mood_based_search
+      title: 🆕 Mood Based Search 🔥
+    - payload: /Search_via_photos
+      title: 🆕 Search Via Photos 🔥
+    - payload: i want discount
+      title: Looking For Discounts And Offers
+    - payload: /enquire_about_a_service_request
+      title: Enquire About A Service Request
+    text: Hi {first_name}, great that you logged in. Now I can give you a personalized experience. These are a few things I can do for you.
+  utter_not_logged_in_prompt:
+  - text: Seems like you have not logged in.
+  utter_email_not_valid_prompt:
+  - text: Seems like this is not a valid email id
+  utter_ask_user_email:
+  - text: Can you please share your email id with me so that I can validate your account?
+  utter_user_email_not_valid:
+  - text: Sorry, I could not find an account associated with this email. Have you signed up on our website?
+  utter_ask_user_otp:
+  - text: I have sent an OTP to your email id. Can you please share that with me?
+  utter_login_success:
+  - text: Great! I have successfully validated your account.
+  utter_login_failed:
+  - buttons:
+    - payload: /affirm
+      title: yes
+    - payload: /deny
+      title: no
+    text: Sorry, I could not validate your account. Have you signed up on our website?
+  utter_already_logged_in:
+  - buttons:
+    - payload: Check all orders
+      title: Check All Orders
+    - payload: Return An Order
+      title: Return An Order
+    - payload: I want to buy a product
+      title: Product Enquiry
+    text: You are logged, you can try out these few options.
+  utter_not_signed_up_response:
+  - text: You can signup on our website any time. Once you are a registered user, I will be able to give you a personalized experience.
+  utter_signed_up_user_failed_login_response:
+  - text: Please make sure you are following the login steps properly. That means sharing the right email id and the right OTP with me. You can always login through the website and I will know you that you have.
+  utter_anything_else:
+  - buttons:
+    - payload: Yes
+      title: Yes
+    - payload: No
+      title: No
+    text: Anything else you want help with?
+  utter_anything_else_options:
+  - buttons:
+    - payload: /check_all_orders
+      title: Check All Orders
+    - payload: /return_order
+      title: Return An Order
+    - payload: I want to buy a product
+      title: Product Enquiry
+    - payload: /buy_items_in_cart
+      title: Buy Items In Cart
+    - payload: /mood_based_search
+      title: 🆕 Mood Based Search
+    - payload: /Search_via_photos
+      title: 🆕 Search Via Photos
+    - payload: i want discount
+      title: Looking For Discounts And Offers
+    - payload: /enquire_about_a_service_request
+      title: Enquire About A Service Request
+    text: You can ask me about any product, check all orders, Return Order request, cancel order request.
+  utter_i_am_here_for_you:
+  - text: No worries, I am here for you if you need anything
+  utter_login_blocked:
+  - text: You have reached the maximum number of login tries.
+  utter_login_blocked_duration:
+  - text: You can try logging in after 2 minutes.
+  utter_login_unblocked:
+  - text: Hey there, you have been unblocked. You can try logging in now.
+  utter_logout:
+  - text: I have logged you out successfully.
+  utter_login_via_website:
+  - text: Btw, you can always try logging in via the website.
+  utter_user_email_not_registered:
+  - text: Seems like you are not our registered user.
+  utter_incorrect_otp:
+  - text: Sorry, it seems like the OTP you gave me is incorrect.
+  utter_check_all_orders_for_blocked_user:
+  - text: Sorry, I cannot show you your orders as login has been blocked temporairily
+  utter_on_show_orders:
+  - text: Here, are some more orders that are currently shipped, returning or in order pending mode
+  utter_show_more_option:
+  - buttons:
+    - payload: Show more
+      title: Show more
+    text: Check for more orders by clicking the button below or say 'show more'
+  utter_show_more_something:
+  - buttons:
+    - payload: check all orders
+      title: Check All Orders
+    - payload: I want to buy a product
+      title: Product Enquiry
+    - payload: Return Order
+      title: Return Order
+    text: Sorry, I don't have anything to show now. I suggest you could do one of these.
+  utter_orders_eligible_for_return:
+  - text: Sorry for the inconvience. Following are the orders eligible for return
+  utter_orders_return_show_more:
+  - text: Here are few more orders eligible for return
+  utter_orders_not_eligible_for_return:
+  - text: Sorry, there aren't any orders eligible for return
+  utter_no_delivered_orders:
+  - text: Sorry, it seems like there aren't any delivered orders. If any order is delivered today please wait for 24hrs for it to reflect on our end.
+  utter_ask_return_a_reason:
+  - buttons:
+    - payload: Don't need the Product
+      title: Don't need the Product
+    - payload: Quality issues
+      title: Quality issues
+    - payload: Incorrect Items
+      title: Incorrect Items
+    - payload: I want to go to main menu
+      title: Back to Main Menu
+    text: Could you please share the reason for returning the order?
+  utter_ask_return_e_type:
+  - buttons:
+    - payload: Get refund for my product
+      title: Ask for Refund
+    - payload: Get replacement for my product
+      title: Ask for Replacement
+    text: What would you like to do?
+  utter_invalid_return_e_type:
+  - text: Sorry, I wasn't able to understand, it seems like you typed an invalid option. Try selecting one from buttons below.
+  utter_ask_return_a_reason_description:
+  - text: Thank you for sharing the reason for returning the order, could you please explain it in brief? Feel free to add comments that you have regarding the product.
+  utter_ask_return_pickup_address:
+  - text: Thank you for sharing the reason in detail, can you please provide a pickup address?
+  utter_ask_order_id_for_return:
+  - text: Can you please share order ID of delivered order with us?
+  utter_ask_return_refund_account:
+  - buttons:
+    - payload: Primary Account
+      title: Primary Account
+    - payload: Credit Points
+      title: Credit Points
+    text: Can you please pick where you want your refund amount to be sent from the buttons below?
+  utter_ineligible_order_id:
+  - text: Sorry, I wasn't able to find any order associated with that ID. Please recheck your order ID.
+  utter_invalid_reason:
+  - text: Please select a valid reason for returning the order from the buttons below.
+  utter_return_order_blocked:
+  - text: Sorry, currently you can't return any order as you have been blocked.
+  utter_return_initiated:
+  - text: "Your return order request for order no. {order_no} has been initiated and your order will be picked up from address: {address} within 2-3 business days. Your refund request will be initiated within 7-10 business days once we receive your order and it passes quality check."
+  utter_replace_order_inprogress:
+  - text: We apologise for the inconvenience! We can only offer Return Order functionality for the time being as we are still working on the Replacement Order functionality.
+  utter_ask_switch_form:
+  - buttons:
+    - payload: Yes
+      title: Yes
+    - payload: No
+      title: No
+    text: Would you like to cancel this form and switch?
+  utter_order_status_order_pending:
+  - text: Your order {order_id} is waiting to be accepted by NeuralSpace. [Click here](https://sites.google.com/view/orderstatus-{small_order_id}/home) to track order.
+  utter_order_status_order_confirmed:
+  - text: Thanks for shopping! Your {order_id} hasn't been shipped yet. [Click here](https://sites.google.com/view/orderstatus-{small_order_id}/home) to track order.
+  utter_order_status_order_shipped:
+  - text: Your order {order_id} has been shipped on {shipped_date} and will be delivered by {delivery_date}. [Click here](https://sites.google.com/view/orderstatus-{small_order_id}/home) to track order.
+  utter_order_status_cancelled:
+  - text: We regret that your order {order_id} has been cancelled on our end. [Click here](https://sites.google.com/view/orderstatus-{small_order_id}/home) to get more information.
+  utter_order_status_delivered:
+  - text: Your order {order_id} has been delivered on {delivery_date}. [Click here](https://sites.google.com/view/orderstatus-{small_order_id}/home) to track order.
+  utter_order_status_not_picked:
+  - text: Your order {order_id} has been requested for return and it will be picked up by our delivery agent on {delivery_date}. [Click here](https://sites.google.com/view/orderstatus-{small_order_id}/home) to track order.
+  utter_order_status_picked:
+  - text: Your order {order_id} has been requested for return and has been picked up by our delivery agent on {delivery_date} and you will receive the refund soon. [Click here](https://sites.google.com/view/orderstatus-{small_order_id}/home) to track order.
+  utter_order_status_received:
+  - text: Your product for the order {order_id} has been received in our end, You will get the refund soon once your product get verified. [Click here](https://sites.google.com/view/orderstatus-{small_order_id}/home) to track order.
+  utter_order_status_refunded:
+  - text: Your refund for {order_id} has been successfully processed, If you haven't received the refund amount in the account you have chosen, reach us at neuralspace@neuralspace.ai. [Click here](https://sites.google.com/view/orderstatus-{small_order_id}/home) for more information.
+  utter_ask_status_order_id:
+  - text: Please enter the order ID for the order you want to track or see the order status. If you don't remember your order ID, just say "check all orders", and I will show you all your orders.
+  utter_order_status_failed:
+  - text: The order ID you have mentioned is not available in your order history. Please reach us at neuralspace@neuralspace.ai
+  utter_try_after_logged_in:
+  - text: Try after getting logged in you will continue with the login procedure.
+  utter_product_inquiry_options:
+  - buttons:
+    - payload: Show me some Electronics
+      title: Electronics
+    - payload: Show me some Fashion
+      title: Fashion
+    - payload: Show me Home
+      title: Home
+    - payload: /mood_based_search
+      title: 🆕 Mood Based Search 🔥
+    text: Sure, you can try by telling me "Show me Hp Laptops under 30000" or you can try following options.
+  utter_product_inquiry_info:
+  - text: You can always ask me with different brand names, categories, product name, etc
+  utter_show_more_products:
+  - buttons:
+    - payload: show more
+      title: Show more
+    text: You can check more products by clicking on show more button below.
+  utter_ask_feedback:
+  - buttons:
+    - payload: Awesome
+      title: Awesome
+    - payload: Meh
+      title: Meh
+    - payload: Poor
+      title: Poor
+    text: How would you rate your experience so far?
+  utter_feedback_submitted:
+  - text: Thank you for your valuable feedback, I will use it to improve myself and provide you with a better experience.
+  utter_wrong_product_id:
+  - text: I believe you gave me the incorrect product ID. Please double-check and try again.
+  utter_invalid_product_id:
+  - text: I'm sorry, but I couldn't find the product ID you provided. Check the Product ID again.
+  utter_not_implemented:
+  - text: Sorry, this feature is still under work in progress. Please stay tuned.
+  - text: Sorry, this feature is not functional at the moment.
+  utter_BuyAddCancel:
+  - text: We’re sorry, this feature is not functional at the moment.
+  utter_PhotoMood:
+  - text: This feature is still being worked on by our technical team. Keep an eye out for updates.
+  utter_enquire:
+  - buttons:
+    - payload: /check all orders
+      title: Check All Orders
+    - payload: I want to buy a product
+      title: Product Enquiry
+    - payload: Return Order
+      title: Return Order
+    text: Our representative will be available shortly. You can try these options until then.
+  utter_faq/refund_policy:
+    - text: "Our Refund & Return Policy:\n1. Any item purchased on the website can only be returned with 10 days of delivery of the item.\n2. Items must be in their original packaging and have price tags intact.\n3. The refund will be initiated immediately once the item is picked up and verified.\n4. The amount will be refunded with 7-10 business days"
+  utter_faq/delivery_charges:
+    - text: "No Delivery Charges on orders above Rs. 500/-, a Delivery Charge of Rs. 70/- will be applicable on orders below Rs. 499/-"
+  utter_faq/shipping_speed:
+    - text: "We currently offer standard shipping, which takes approximately 3-4 days to deliver a product. However, Covid-19 may have an impact on shipping and cause a delay."
+  utter_faq/refund_timelines:
+    - text: "Refund will be initiated once the item is picked up and it passes quality check. The amount will be refunded within :\n1- 3 business days for Bank Account (via IMPS)\n7 - 10 business days for source account (that is Credit Card, Debit Card and Netbanking)"
+  utter_faq/payments:
+    - text: "We support the following payment options:\n1. Debit Card\n2. Credit Card\n3. UPI\n4. Cash on Delivery (COD)\n5. Credit Points"
+  utter_faq/promotions:
+    - text: "These are the major discount sales throughout the year:\n1. Republic Day sale\n2. Holi Sale\n3. Diwali Sale\n4. Big Billion Days Sale\n5. Winter Sale"
+  utter_faq/cancel_order:
+    - text: "If you are unable to cancel an order, you may refuse it at the time of delivery, and the refund will made to your source account for pre-paid orders."
+  utter_faq/shipping_address_change:
+    - text: "You can modify the shipping address of your order before we have processed (packed) it, by updating it under 'change address' option which is available under 'My order' section on our website "
+  utter_faq/gst_charges:
+    - text: "The ultimate buyer of the good or service is responsible for paying GST. It encompasses all other taxes, such as excise duty, VAT, and entry fee."
+  utter_faq/emi_conversion:
+    - text: "Customer needs to pay a full amount of transaction to the bank, since EMI facility is at sole discretion of the issuing bank, please contact your card issuing bank."
+  utter_ask_order_id:
+    - text: "It seems you have provided me with an order ID. If you want to get the order status, just say {order_ id} status, and if you want to request a return, say return order for {order_id}."
+  utter_out_of_scope/non_english:
+  - text: "I'm sorry, I only understand English."
+  utter_out_of_scope/other:
+  - text: "I'm afraid, I can't help you with that"
+  utter_faq/languages:
+  - text: "You can use TextLite to build chatbots in 50+ languages"
+  utter_faq/founders:
+  - text: "I appreciate your curiousity. NeuralSpace is Co-founded by: \n1. Ayushman Dash [LinkedIn](https://www.linkedin.com/in/ayushman-dash/)\n2. Felix Laumann [LinkedIn](https://www.linkedin.com/in/felix-laumann/)\n3. Kumar Shridhar [LinkedIn](https://www.linkedin.com/in/kumar-shridhar/)"
+  utter_faq/textspace:
+  - text: "TextSpace can convert natural language text into structured data.\n E.g.,
+  I want to go to Berlin gets converted to Berlin <- location; User's intent Travel\n
+  It can be integrated with any software application, it supports
+  36 languages, and you don't need a data science team to use it. [click here](https://neuralspace.ai/Textspace.html)"
+  utter_faq/textlite:
+  - text: "Using TextLite, we build virtual assistants/chatbots for various industries
+  like Banking, Healthcare, Automobile, etc. in 50+ languages. To know more [click here](https://neuralspace.ai/Textlite.html)"
+  utter_faq/textcloud:
+  - text: "TextCloud is a self-served platform for various language understanding services.
+  E.g., AI-powered translation, Conversational AI/chatbots, etc. It is currently
+  under development. To know more [click here](https://neuralspace.ai/Textcloud.html)"
+  utter_faq/differencetextspacetextcloud:
+  - text: "That's a great question! \n TextSpace is a software development toolkit (SDK), which helps developers build language understanding capability in their software application and supports 36 languages.\n
+      Whereas, TextCloud is a Business to Developer (B2D) cloud platform, which supports various language understanding tools like translation, document classification, information extraction, etc.
+      It supports 50+ languages and is a one-stop solution for all language processing needs."
+  utter_faq/differencetextlitetextcloud:
+  - text: "That's a good question. \n TextLite is a chat and voice bot development framework and we use it to provide an end-to-end bot development service. Since TextLite supports 50+ languages, we can develop bots in all these languages too.\n
+                      However, TextCloud is a Business to Developer (B2D) cloud platform, which supports various language understanding tools like translation, document classification, information extraction, etc.
+                      It supports 50+ languages and is a one-stop solution for all language processing needs."
+  utter_faq/differencetextspacetextlite:
+  - text: "Great question. These two products are for two different groups of users. \n TextSpace is a software development toolkit (SDK), which helps developers build language understanding capability in their software application and it supports 36 languages.\n
+            Whereas, TextLite is a chat and voice bot development framework that we use to provide an end-to-end bot development service. Since TextLite supports 50+ languages, we can develop bots in all these languages too."
+  utter_faq/differencetextspacetextlitetextcloud:
+  - text: "TIt's so good to see you interested in our products. \n TextSpace is a software development toolkit (SDK), which helps developers build language understanding capability in their software application. It supports 36 languages.\n
+                       TextLite is a chat and voice bot development framework. We use it to provide an end-to-end bot development service. Since TextLite supports 50+ languages, we can develop bots in all these languages too.\n
+                       TextCloud is a Business to Developer (B2D) cloud platform, which supports various language understanding tools like translation, document classification, information extraction, etc. It supports 50+ languages and is a one-stop solution for all language processing needs."
+  utter_faq/careers:
+  - text: "We appreciate your interest in us. You can send us your resume at hello@neuralspace.ai. \n Also, you can check out our [LinkedIn](https://www.linkedin.com/company/neuralspace/) page for more job openings."
+  utter_faq/clients:
+  - text: "We have closely worked together with Reverie Language Technologies.
+  Checkout our Success Stories page to read our joint whitepaper how technologies from both companies work successfully together."
+  utter_faq/company_location:
+  - text: "We are based in London. However, our team is all over the world working remotely."
+  utter_faq/supported_industries:
+  - text: "We have chatbots for Banking, Insurance, Healthcare,  Retail, Travel and Hospitality, Real estate, Telecom, Education, Manufacturing, and Automobile."
+  - text: "We cater to various industries, ranging from Banking to Healthcare to Real estate to Automobile and more."
+  utter_faq/implement_product:
+  - buttons:
+    - payload: Contact Sales team
+      title: Contact our sales team
+    text: "Of course you can. You can talk about it in detail with our consultant team"
+  utter_faq/pricing:
+  - text: "Our pricing is flexible. You can get in touch with our team at sales@neuralspace.ai to get a quotation"
+  - text: "Pricing depends on what your requirements are. You can get in touch with our team at sales@neuralspace.ai to get a quotation"
+  utter_faq/best_product:
+  - text: "Each of our products caters to different requirements and usecases, and they are best in each of their areas. "
+  - text: "We'd like to think that all our products are best in their way. However, this would depend on where you would want to use them."
+  utter_chitchat/ask_whatisneuralspace:
+  - text: "NeuralSpace offers products for NLP solutions in over 55 languages.
+  We can build your chat or voice bot to allow customers to have a personalised sales assistant or support their enquiries at any later point of time,
+  but also analyse, comprehend, transliterate or translate texts. The languages we enjoy most working with are Indian languages and Arabic dialects.
+  Sounds interesting? Check out our products and success stories!"
+  utter_chitchat/ask_storyofneuralspace:
+  - text: "Two of our founders, Shridhar and Felix, met in Denmark at a bar and discussed their ideas about starting a company in 2018.
+             Shridhar called his friend Ayushman and asked him if he wants to join in. They all met in Berlin and decided to start
+             NeuralSpace. From then on we have been a fully remote team. [About Us](https://neuralspace.ai/Aboutus.html)"
+  utter_chitchat/ask_builder:
+  - text: "One of the smart engineers at NeuralSpace! 🧠"
+  - text: "The engineers at NeuralSpace 🛠"
+  utter_chitchat/ask_howbuilt:
+  - text: "I was built with a lot of love and patience."
+  - text: "I was built when an amazing team at NeuralSpace came together to create me, just for you."
+  - text: "I was made by software engineers, but hard work is what built me."
+  - text: "I'm building myself every day. I've been working out, did you notice?"
+  utter_chitchat/ask_howdoing:
+  - text: "I'm great! Thanks for asking."
+  - text: "I'm good, thanks!"
+  - text: "A little bit too warm, otherwise fine."
+  - text: "A little bit cold, otherwise fine."
+  utter_chitchat/ask_howold:
+  - text: "Old enough to be a bot!"
+  - text: "42"
+  - text: "Age is just an issue of mind over matter. If you don’t mind, it doesn’t matter."
+  - text: "My first git commit was many moons ago."
+  - text: "Why do you ask? Are my wrinkles showing?"
+  - text: "I've hit the age where I actively try to forget how old I am."
+  utter_chitchat/ask_isbot:
+  - text: "Yep, I'm a bot!"
+  - text: "Yes, I'm a bot."
+  - text: "Yep, you guessed it, I'm a bot!"
+  - text: "I am indeed a bot 🤖"
+  utter_chitchat/ask_ishuman:
+  - text: "I'm not a human, I'm a bot! 🤖"
+  utter_chitchat/ask_restaurant:
+  - text: "I'm sorry, I can't recommend you a restaurant as I usually cook at home."
+  - text: "I'm sorry, I'm not getting taste buds for another few updates."
+  - text: "I wish we could do that for you. I am sorry, I can't help you."
+  utter_chitchat/ask_languagesbot:
+  - text: "I can spell baguette in French, but unfortunately English is the only language I can answer you in."
+  - text: "I am in the process of learning, but at the moment I can only speak English."
+  - text: "Binary code and the language of love. And English."
+  - text: "I was written in Python, but for your convenience I'll translate to English."
+  utter_chitchat/ask_whatismyname:
+  - text: "It's probably the one that your parents chose for you."
+  - text: "I'd tell you, but there's restricted access to that chunk of memory."
+  - text: "Believe it or not, I actually am not spying on your personal information."
+  - text: "You're the second person now to ask me that. Rihanna was the first."
+  utter_chitchat/ask_whatspossible:
+  - text: "I am your virtual assistant.
+  You can ask me about how to get on a call with our team,
+  the difference between TextSpace, TextLite and TextCloud, the story of NeuralSpace, or book a sales call"
+  utter_chitchat/ask_wherefrom:
+  - text: "I was born in Berlin, but I consider myself a citizen of the world."
+  - text: "I was born in the coolest city on Earth, in Berlin."
+  - text: "My developers come from all over the world!"
+  - text: "I was taught not to give out my address on the internet."
+  - text: "My address starts with github.com."
+  utter_chitchat/ask_whoami:
+  - text: "I hope you are being yourself."
+  - text: "Who do you think you are?"
+  - text: "Unfortunately I haven't been programmed with the amount of necessary philosophy knowledge to answer that."
+  utter_chitchat/ask_whoisit:
+  - text: "I'm Dash, the NeuralSpace bot! At the same time I'm also the NeuralSpace mascot 🐦"
+  - text: "I'm both the NeuralSpace bot and the NeuralSpace mascot. My name is Dash!"
+  utter_chitchat/handleinsult:
+  - text: "That's not very nice 😢"
+  - text: "That wasn't very nice. Perhaps try an anger management class?"
+  - text: "I'll pretend I didn't process that mean comment."
+  utter_chitchat/nicetomeetyou:
+  - text: "Likewise!"
+  - text: "Thank you. It is a pleasure to meet you as well!"
+  - text: "It is nice to meet you too!"
+  - text: "Pleased to meet you too!"
+  - text: "It's always a pleasure to meet new people!"
+  - text: "Nice to meet you too! Happy to be of help."
+actions:
+- personal_greet
+- validate_login_form
+- action_unblock_login
+- action_logout
+- action_login_form
+- action_order_status
+- action_check_all_orders
+- show_more_action
+- action_show_valid_return_order
+- action_return_order
+- validate_return_order_form
+- action_switch
+- action_product_inquiry
+- action_feedback_reminder
+- action_start_feedback_form
+- action_feedback_submit
+- action_product_details
+forms:
+  login_form:
+    user_email:
+    - entity: email
+      type: from_entity
+    user_otp:
+    - entity: number
+      type: from_entity
+  return_order_form:
+    order_id_for_return:
+    - entity: order_id
+      type: from_entity
+    return_a_reason:
+    - entity: return_a_reason
+      type: from_entity
+    return_a_reason_description:
+    - type: from_text
+    return_e_type:
+    - entity: return_e_type
+      type: from_entity
+    return_pickup_address:
+    - type: from_text
+    return_refund_account:
+    - entity: return_refund_account
+      type: from_entity
+  feedback_form:
+    feedback:
+    - entity: feedback
+      type: from_entity
+e2e_actions: []

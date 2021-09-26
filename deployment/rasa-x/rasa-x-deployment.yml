@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rasa-x
+  namespace: dash-ecomm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: rasa-x
+      type: dash-ecomm
+  template:
+    metadata:
+      labels:
+        component: rasa-x
+        type: dash-ecomm
+    spec:
+      containers:
+      - image: textclouddev.azurecr.io/neuralspace/dash-ecomm:latest
+        imagePullPolicy: Always
+        command: [ "poetry","run","rasa","x", "--cors", "*", "--no-prompt"]
+        name: dash-ecomm-rasa-x
+        env:
+          - name: RASA_X_PASSWORD
+            value: oldNg8j9NFUAJ
+        ports:
+        - containerPort: 5002
+        resources:
+          requests:
+            cpu: 0.2
+            memory: 100Mi
+      restartPolicy: Always

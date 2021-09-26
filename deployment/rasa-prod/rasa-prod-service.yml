@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: dash-ecomm
+  name: rasa-prod
+spec:
+  ports:
+    - name: rasa-prod-port
+      port: 5005
+      targetPort: 5005
+  selector:
+    component: rasa-prod
+  type: ClusterIP
